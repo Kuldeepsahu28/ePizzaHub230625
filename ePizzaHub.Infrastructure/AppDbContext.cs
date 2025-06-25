@@ -36,6 +36,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<UserToken> UserTokens { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Cart>(entity =>
@@ -145,6 +147,15 @@ public partial class AppDbContext : DbContext
                         j.HasKey("UserId", "RoleId");
                         j.ToTable("UserRoles");
                     });
+        });
+
+        modelBuilder.Entity<UserToken>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__UserToke__3214EC076BAED2B6");
+
+            entity.Property(e => e.AccessToken).HasMaxLength(2000);
+            entity.Property(e => e.RefreshToken).HasMaxLength(1000);
+            entity.Property(e => e.RefreshTokenExpiryTime).HasColumnType("datetime");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -61,6 +61,10 @@
       {
          "Name": "[dbo].[Users]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserTokens]",
+         "ObjectType": 0
       }
    ],
    "UiHint": null,
